@@ -5,9 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "prebuild": "./node_modules/.bin/tslint  -c tslint.json -p tsconfig.json --fix",
-    "build": "./node_modules/.bin/webpack-cli --watch",
-    "prestart": "",
+    "build": "webpack-cli --watch",
+    "postrestart": "npm run start:react",
     "start": "concurrently \"npm run build\" \"nodemon .\"",
+    "start:react": "concurrently   \"cd ./client/r-view/ && npm start\"",
+    "start:dev": "concurrently  \"npm start\" \"npm run start:react\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -35,8 +37,6 @@
     "ts-loader": "^5.3.3",
     "tslint": "^5.13.0",
     "typescript": "^3.3.3333",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
     "webpack-node-externals": "^1.7.2"
   }
 }

@@ -1,1 +1,4 @@
 node_modules
+dist
+client/r-view/node_modules
+client/r-view/build

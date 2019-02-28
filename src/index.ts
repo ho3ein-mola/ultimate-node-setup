@@ -18,14 +18,10 @@ const mod = process.env.APP_MOD || "dev";
 app.use(
   session({
     cookie: { maxAge: 60000 },
-    resave: false,
     saveUninitialized: false,
     secret: "conduit"
   })
 );
-
-// static folder
-app.use(express.static(path.join(__dirname, "public")));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,11 +32,18 @@ app.use(bodyParser.json());
 // enable cross origin request
 app.use(cors());
 
+// dev mod
 if (mod === "dev") {
+  app.use(express.static("client/r-view/build"));
   mongoose.connect("mongodb://localhost/");
+} else {
+  app.use(express.static("client/r-view/public"));
 }
 
+app.get("/test", (req, res, next) => {
+  res.json({ a: "data from express" });
+});
+
 app.listen(port, () => {
-  console.log(`server started ate1 http://localhost:${port}`);
   console.log(`server started ate1 http://localhost:${port}`);
 });
