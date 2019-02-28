@@ -34,10 +34,10 @@ app.use(cors());
 
 // dev mod
 if (mod === "dev") {
-  app.use(express.static("client/r-view/build"));
+  app.use(express.static("client/r-view/public"));
   mongoose.connect("mongodb://localhost/");
 } else {
-  app.use(express.static("client/r-view/public"));
+  app.use(express.static("client/r-view/build"));
 }
 
 app.get("/test", (req, res, next) => {
